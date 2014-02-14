@@ -1,0 +1,25 @@
+
+div#header, div#content, div#footer{
+    margin: 20px 35px;
+}
+h1{
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
+    font-size: 1rem;
+    line-height: 2.5rem;
+}
+h2{
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
+    font-size: 1rem;
+}
+body{
+    background-color: #fff;
+}
+#footer p{
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+#footer h2{
+    margin-top: 20px;
+}

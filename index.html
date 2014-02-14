@@ -1,0 +1,71 @@
+<html>
+<head>
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery.optionTree.js"></script>
+<script src="./js/2013_aoiku_surugaku.json" charset="utf-8"></script>
+<link  rel="stylesheet" href="/css/apps.css" />
+<link rel="stylesheet" href="css/foundation.css" />
+<script src="js/vendor/modernizr.js"></script>
+
+<style type="text/css">
+select.vertical {
+    display: block;
+}
+.results {
+    margin: 10px;
+    color: darkgreen;
+}
+
+
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="カレンダーデータに変換した静岡市のごみ回収日のデータをダウンロードできます。" />
+<meta name="keywords" content="静岡市,ごみ,回収日,カレンダー,iCal,ics" />
+<title>平成25年度版　静岡市の可燃ゴミ・缶瓶ゴミ回収日 カレンダーコンバーター</title>
+</head>
+<body>
+<div id="header">
+<h1>静岡市　可燃ゴミ・缶瓶ゴミ回収日 カレンダーコンバーター</h1>
+<hr />
+<h2>お住まいの地区を選んで、地域コードが入力されたらダウンロードボタンを押してください。</h2>
+</div>
+<div id="content">
+<form method="get" id="myform">
+<input type="text" name="chiku" id="inputbox"/>
+
+<button type="submit" id="btn">カレンダーをダウンロード</button>
+</form>
+</div>
+<div id="footer">
+<p>「静岡市のごみ回収日カレンダーコンバーター」は静岡市駿河区・葵区地域の可燃物及びビン缶のごみ収集日乃データを、お住まいの自治会・町内会名から指定してiCalendar形式でダウンロードできるサービスです。カレンダーはMacのカレンダーでの動作を確認しています。</p>
+<p>※このサービスの駿河区・葵区のデータは静岡市の「<a href="http://www.city.shizuoka.jp/deps/shushu/bunbetsu-guidebook.html">平成25年度 葵区・駿河区のごみの出し方・分別ガイドブック</a>」のデータをコピペして作っています。正確なデータについては元となったガイドブックをご確認ください。</p>
+<h2>更新情報</h2>
+<p>2014/2/11 <a href="https://twitter.com/kudarisenmon" target="_blank">@kudarisenmon</a>さんにいただた清水区のデータを追加しました。</p>
+<h2>お問い合わせ</h2>
+<p>このサービスについてお気づきの点やお問い合わせが有れば<a href="https://twitter.com/oec014">作成者（オーイシ）のTwitterアカウント</a>までご連絡ください。</p>
+</div>
+<script type="text/javascript">
+$(function() {
+
+        var config = {
+    	choose: '地区を選んでください',
+    	indexed: false,
+    	empty_value: '1001'
+    }
+
+    $('input[name=chiku]').optionTree(option_tree,config);
+    $('#btn').click(function(){
+    	chikuid = $('#inputbox').val()
+    	if(chikuid != ""){
+    	 	$('#myform').attr("action","/calendar");
+    	 	$('#myform').submit();
+    	}else{
+    		alert("お住まいの地区を選んでください")
+    	}
+    })
+
+});
+</script>
+
+</body>
+</html>
