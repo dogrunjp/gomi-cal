@@ -1,16 +1,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>CSVファイルのアップロード</title>
+<title>calendar</title>
 </head>
 <body>
 
 <hr />
 <ul>
-<li>{{data.kanen}}</li>
-<li>{{data.funen}}</li>
-</ul>
 
+<li>{{items.jichitai}}:{{items.kanen}}:{{items.binkan}}:{{items.bstart}}:{{items.kstart}}</li>
+{% for f in items.funens %}
+<br> {{f.funen}}
+{% endfor %}
+
+</ul>
+<h2>
+{{items.funens[0].funen}}
+</h2>
 
 
 </body>

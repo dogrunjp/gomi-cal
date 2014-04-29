@@ -1,25 +1,149 @@
-
-div#header, div#content, div#footer{
-    margin: 20px 35px;
+body{
+    background-color: #fff;
+    line-height: 1.8;
 }
 h1{
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
-    font-size: 1rem;
     line-height: 2.5rem;
 }
 h2{
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
-    font-size: 1rem;
 }
-body{
-    background-color: #fff;
+h3{
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
+    color: #444444;
+}
+p{
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
+}
+#footer img, #content img{
+    vertical-align: baseline;
 }
 #footer p{
+    text-align: left;
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
-    font-size: 1rem;
     line-height: 1.8;
-    margin-bottom: 30px;
+    margin: 0 0 15px;
 }
-#footer h2{
-    margin-top: 20px;
+@media screen and (min-width: 800px ) {
+   nav.top-bar{
+    margin: 0;
+    padding: 0;
+    background-color: #0f92ba;
+    height: 40px;
+    }
+    nav.top-bar h1{
+        line-height: 2;
+        color: #ffffff;
+        margin-top: 0px;
+        margin-left: 10px;
+        font-size: 1.25rem;
+        font-weight: normal;
+    }
+
+    div#header{
+        width:780px;
+        margin: 0 auto;
+    }
+    div#header p{
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
+    div#content{
+        width: 780px;
+        margin: 0 auto;
+    }
+    #content h3{
+        font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
+        color: #444444;
+        margin: 30px 0 15px;
+        font-size:1.05rem;
+        font-weight: normal;
+    }
+    #content label{
+        font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
+        color: #444444;
+        font-size: 1rem;
+    }
+    div#footer {
+        width: 780px;
+        margin: 30px auto;
+    }
+
+
+}
+@media screen and (max-width: 799px) {
+  nav.top-bar{
+    margin: 0;
+    padding: 0;
+    background-color: #0f92ba;
+    height: 40px;
+    }
+    nav.top-bar h1{
+        line-height: 2;
+        color: #ffffff;
+        margin-top: 0px;
+        margin-left: 10px;
+        font-size: 1.25rem;
+        font-weight: normal;
+    }
+    #content h3{
+        margin: 30px 0 15px;
+        font-size:1rem;
+        line-height: 1.6;
+        font-weight: normal;
+    }
+    div#header{
+        width:80%;
+        margin: 0 auto;
+    }
+    div#header p{
+        margin-top: 20px;
+    }
+    div#content{
+        width: 80%;
+        margin: 0 auto;
+    }
+    div#footer {
+        width: 80%;
+        margin: 30px auto;
+
+    }
+}
+@media screen and (max-width: 600px){
+  nav.top-bar{
+    margin: 0;
+    padding: 0;
+    background-color: #0f92ba;
+    height: 35px;
+    }
+    nav.top-bar h1{
+        line-height: 2;
+        color: #ffffff;
+        margin-top: 0px;
+        margin-left: 10px;
+        font-size: 1.05rem;
+        font-weight: normal;
+    }
+    div#header{
+        width:90%;
+        margin: 0 auto;
+    }
+    div#header p{
+        margin-top: 10px;
+    }
+    div#content{
+        width: 90%;
+        margin: 0 auto;
+    }
+    #content h3{
+        margin: 20px 0 10px;
+        font-size:1rem;
+        line-height: 1.6;
+        font-weight: normal;
+    }
+    div#footer {
+        width: 90%;
+        margin: 30px auto;
+    }
 }

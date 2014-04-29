@@ -1,11 +1,10 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/jquery.optionTree.js"></script>
-<script src="./js/2013_aoiku_surugaku.json" charset="utf-8"></script>
+<script src="js/2013_aoi_suruga_shimizu.json" charset="utf-8"></script>
 <link  rel="stylesheet" href="/css/apps.css" />
 <link rel="stylesheet" href="css/foundation.css" />
-<script src="js/vendor/modernizr.js"></script>
 
 <style type="text/css">
 select.vertical {
@@ -19,30 +18,39 @@ select.vertical {
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content="カレンダーデータに変換した静岡市のごみ回収日のデータをダウンロードできます。" />
-<meta name="keywords" content="静岡市,ごみ,回収日,カレンダー,iCal,ics" />
-<title>平成25年度版　静岡市の可燃ゴミ・缶瓶ゴミ回収日 カレンダーコンバーター</title>
+<meta name="description" content="静岡市のお住まいの地区のごみ回収日のデータをカレンダー形式でダウンロードできます。" />
+<meta name="keywords" content="静岡市,ごみ,回収日,カレンダー,iCal,ics,可燃ゴミ,駿河区,葵区,清水区" />
+<title>私のゴミカレンダー　平成26年度静岡市版</title>
 </head>
 <body>
-<div id="header">
-<h1>静岡市　可燃ゴミ・缶瓶ゴミ回収日 カレンダーコンバーター</h1>
-<hr />
-<h2>お住まいの地区を選んで、地域コードが入力されたらダウンロードボタンを押してください。</h2>
-</div>
-<div id="content">
-<form method="get" id="myform">
-<input type="text" name="chiku" id="inputbox"/>
 
-<button type="submit" id="btn">カレンダーをダウンロード</button>
-</form>
+<nav class="top-bar">
+<h1>私のゴミカレンダー　平成26年度静岡市版</h1>
+</nav>
+<div id="header">
+    <p>「私のゴミカレンダー」は静岡市（一部地域除く）のお住まいの地区のごみ収集日
+    カレンダー形式でダウンロードできるサービスです。
+    ダウンロードしたファイル（icsファイル）はMacやiPhoneのカレンダーにインポートできます。
+    ゴミ回収日のリマインダーとして、普段使うスマホやPCのカレンダーに表示してご利用ください。
+    </p>
 </div>
-<div id="footer">
-<p>「静岡市のごみ回収日カレンダーコンバーター」は静岡市駿河区・葵区地域の可燃物及びビン缶のごみ収集日乃データを、お住まいの自治会・町内会名から指定してiCalendar形式でダウンロードできるサービスです。カレンダーはMacのカレンダーでの動作を確認しています。</p>
-<p>※このサービスの駿河区・葵区のデータは静岡市の「<a href="http://www.city.shizuoka.jp/deps/shushu/bunbetsu-guidebook.html">平成25年度 葵区・駿河区のごみの出し方・分別ガイドブック</a>」のデータをコピペして作っています。正確なデータについては元となったガイドブックをご確認ください。</p>
-<h2>更新情報</h2>
-<p>2014/2/11 <a href="https://twitter.com/kudarisenmon" target="_blank">@kudarisenmon</a>さんにいただた清水区のデータを追加しました。</p>
-<h2>お問い合わせ</h2>
-<p>このサービスについてお気づきの点やお問い合わせが有れば<a href="https://twitter.com/oec014">作成者（オーイシ）のTwitterアカウント</a>までご連絡ください。</p>
+
+<div id="content">
+    <h3><img src="images/icon_p.png"> お住まいの地区を選び、数字のコードが入力されたらダウンロードボタンを押してください</h3>
+        <form method="get" id="myform">
+        <input type="text" name="chiku" id="inputbox"/>
+        <label for="onalarm">
+            <input type="checkbox" name="alarm" id="onalarm" />
+            カレンダーのアラーム機能を利用する
+        </label>
+        <button type="button" id="btn">カレンダーをダウンロード</button>
+        </form>
+</div>
+<div id="footer" class="row">
+    <p><img src="images/icon_f_p.png"> このサービスは静岡市の「<a href="http://www.city.shizuoka.jp/deps/shushu/bunbetsu-guidebook.html">平成26年度 葵区・駿河区のごみの出し方・分別ガイドブック</a>」
+    を基に、<a href="https://twitter.com/kudarisenmon" target="_blank">@kudarisenmon</a>さんに作成していいただいたデータを利用して運営しています。</p>
+    <p><img src="images/icon_f_p.png"> このサービスは、一部不完全なデータを含んでいます。正確なデータを知りたい方は静岡市のガイドブックをご利用ください。またデータの不具合やなどお気づきのことがあれば、<a href="https://twitter.com/oec014">サービス運営者</a>のTwitterアカウントにご連絡ください。
+    </p>
 </div>
 <script type="text/javascript">
 $(function() {
@@ -57,12 +65,12 @@ $(function() {
     $('#btn').click(function(){
     	chikuid = $('#inputbox').val()
     	if(chikuid != ""){
-    	 	$('#myform').attr("action","/calendar");
-    	 	$('#myform').submit();
+                    $('#myform').attr("action","/calendar");
+    	 	        $('#myform').submit();
     	}else{
     		alert("お住まいの地区を選んでください")
     	}
-    })
+    });
 
 });
 </script>
