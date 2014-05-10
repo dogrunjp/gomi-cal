@@ -1,29 +1,39 @@
 body{
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
     background-color: #fff;
     line-height: 1.8;
 }
-h1{
-    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
-    line-height: 2.5rem;
-}
-h2{
-    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
-}
-h3{
-    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
-    color: #444444;
-}
 p{
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
+}
+#content input{
+    font-size: 1.6rem;
+}
+#content label{
+    font-size: 1.6rem;
+}
+#content form button{
+    width: 100%;
 }
 #footer img, #content img{
     vertical-align: baseline;
 }
 #footer p{
     text-align: left;
-    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
     line-height: 1.8;
     margin: 0 0 15px;
+}
+#footer-bar{
+    height: 35px;
+    position: fixed;
+    bottom: 0;
+    background-color: #0f92ba;
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+}
+#footer-bar .name{
+    margin-top: 10px;
 }
 @media screen and (min-width: 800px ) {
    nav.top-bar{
@@ -41,15 +51,15 @@ p{
         font-weight: normal;
     }
 
-    div#header{
+    #header{
         width:780px;
         margin: 0 auto;
     }
-    div#header p{
+    #header p{
         margin-top: 40px;
         margin-bottom: 30px;
     }
-    div#content{
+    #content{
         width: 780px;
         margin: 0 auto;
     }
@@ -65,9 +75,10 @@ p{
         color: #444444;
         font-size: 1rem;
     }
-    div#footer {
+    #footer {
         width: 780px;
-        margin: 30px auto;
+        margin: 30px auto 60px;
+        min-height: 100px;
     }
 
 
@@ -93,57 +104,107 @@ p{
         line-height: 1.6;
         font-weight: normal;
     }
-    div#header{
+    #header{
         width:80%;
         margin: 0 auto;
     }
-    div#header p{
+    #header p{
         margin-top: 20px;
     }
-    div#content{
+    #content{
         width: 80%;
         margin: 0 auto;
     }
-    div#footer {
+    #footer {
         width: 80%;
         margin: 30px auto;
-
+    }
+    #footer-bar{
+    position: relative;
+    height: 40px;
+    background-color: #0f92ba;
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+    padding-top: 5px;
+    }
+    #footer-bar .name{
+        font-size: 1.6rem;
     }
 }
-@media screen and (max-width: 600px){
-  nav.top-bar{
+@media only screen
+ and (min-device-width: 320px)
+ and (-webkit-min-device-pixel-ratio: 2) {
+    nav.top-bar{
     margin: 0;
     padding: 0;
     background-color: #0f92ba;
-    height: 35px;
+    height:80px;
     }
     nav.top-bar h1{
         line-height: 2;
         color: #ffffff;
         margin-top: 0px;
-        margin-left: 10px;
-        font-size: 1.05rem;
-        font-weight: normal;
+        margin-left: 12px;
+        font-size: 2.45rem;
+        font-weight: bold;
     }
-    div#header{
+    #header{
         width:90%;
         margin: 0 auto;
     }
-    div#header p{
-        margin-top: 10px;
+    #header p{
+        margin-top: 15px;
+        font-size: 2rem;
+        line-height: 1.8;
     }
-    div#content{
+    #content{
         width: 90%;
         margin: 0 auto;
     }
     #content h3{
         margin: 20px 0 10px;
-        font-size:1rem;
         line-height: 1.6;
         font-weight: normal;
+        font-size: 2rem;
     }
-    div#footer {
+    #content form select{
+        font-size: 30px;
+        height: 60px;
+    }
+    #content form label{
+        font-size: 36px;
+        margin-bottom: 22px;
+    }
+    #content form input{
+        height: 56px;
+    }
+    #content form input[type="checkbox"]{
+        font-size: 36px;
+    }
+    #content button{
+        font-weight: bold;
+        font-size: 1.8rem;
+    }
+    #footer.row{
         width: 90%;
-        margin: 30px auto;
+        padding-bottom: 60px;
+        margin: 30px auto 60px;
+        min-height: 250px;
+    }
+    #footer p{
+        font-size: 1.6rem;
+    }
+    #footer-bar{
+        position: relative;
+        height: 60px;
+        background-color: #0f92ba;
+        text-align: center;
+        color: #ffffff;
+        width: 100%;
+        padding-top: 5px;
+    }
+    #footer-bar .name{
+        font-size: 1.8rem;
     }
 }

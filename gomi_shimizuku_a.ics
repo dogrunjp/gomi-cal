@@ -19,7 +19,7 @@ LOCATION:{{items.jichitai}}
 DESCRIPTION:清水区{{items.jichitai}}の可燃ゴミ回収日
 DTSTART;TZID=Japan:{{items.kstart}}
 DTEND;TZID=Japan:
-RRULE:FREQ=WEEKLY;UNTIL=20150331T000000;WSST=SU;BYDAY={{items.kanen}}
+RRULE:FREQ=WEEKLY;UNTIL=20150331T000000;WKST=SU;BYDAY={{items.kanen}}
 CATEGORIES:静岡市ゴミ回収日
 TRANSP:TRANSPARENT
 PRIORITY:0
@@ -47,14 +47,14 @@ TRIGGER:-PT12H
 ACTION:DISPLAY
 END:VALARM
 END:VEVENT
-{% for item in items.binkans %}
+{% for item in sbinkan %}
 BEGIN:VEVENT
 UID:shizu-gomi.binkan{{loop.index0}}.{{params.today}}
 DTSTAMP:{{params.today}}
 SUMMARY:ビン缶ゴミ回収日
 LOCATION:{{items.jichitai}}
 DESCRIPTION:清水区{{items.jichitai}}の缶ビンゴミ回収日
-DTSTART;TZID=Japan:{{item.binkan}}T000000
+DTSTART;TZID=Japan:{{item.smbinkan.binkan}}T000000
 DTEND;TZID=Japan:
 CATEGORIES:静岡市ゴミ回収日
 TRANSP:TRANSPARENT

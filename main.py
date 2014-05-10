@@ -5,7 +5,7 @@
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# You may obtain a copy of the License
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
@@ -55,13 +55,14 @@ class Smgomi(db.Model):
     kstart = db.StringProperty()
     fstart = db.StringProperty()
     chomei = db.StringProperty()
-    smbinkans = db.ListProperty(db.Key)
 
 class Smbinkan(db.Model):
     chomei = db.StringProperty()
     binkan = db.StringProperty()
-    #smgomi = db.ReferenceProperty(Smgomi, collection_name="binkans")
 
+class Smgomibinkan(db.Model):
+    smgomi = db.ReferenceProperty(Smgomi, collection_name='smbinkans')
+    smbinkan = db.ReferenceProperty(Smbinkan, collection_name='smgomis')
 
 class SzEntry(webapp2.RequestHandler):
     def get(self):
@@ -108,7 +109,7 @@ class SzFunenEntry(webapp2.RequestHandler):
             ).put()
         self.redirect(self.request.uri)
 
-class SmEntry(webapp2.RequestHandler):
+class SmBinkanEntry(webapp2.RequestHandler):
     def get(self):
         if users.is_current_user_admin():
             template = JINJA_ENVIROMENT.get_template('upload.html')
@@ -119,19 +120,14 @@ class SmEntry(webapp2.RequestHandler):
         rawfile = self.request.get('file')
         csvfile = csv.reader(StringIO(rawfile),dialect='excel')
         for row in csvfile:
-            s = Smgomi(key_name = str(row[1]),
-            initial=unicode(row[0],'UTF-8'),
-            jichitai=unicode(row[2],'UTF-8'),
-            kanen = unicode(row[3],'UTF-8'),
-            funen = unicode(row[4],'UTF-8'),
-            chomei = unicode(row[5],'utf-8'),
-            kstart = unicode(row[6],'UTF-8'),
-            fstart = unicode(row[7],'UTF-8')
-            )
-            s.put()
+            Smbinkan(key_name=str(row[0]),
+            chomei = unicode(row[1],'utf-8'),
+            binkan=unicode(row[2],'utf-8')
+            ).put()
         self.redirect(self.request.uri)
 
-class SmBinkanEntry(webapp2.RequestHandler):
+#SmbinkanEntryを実行し、ビン缶データを登録ごjoin tableとともに可燃ゴミデータを登録する
+class SmKFBEntry(webapp2.RequestHandler):
     def get(self):
         if users.is_current_user_admin():
             template = JINJA_ENVIROMENT.get_template('upload.html')
@@ -140,14 +136,25 @@ class SmBinkanEntry(webapp2.RequestHandler):
             self.redirect(users.create_login_url(self.request.uri))
     def post(self):
         rawfile = self.request.get('file')
-        csvfile = csv.reader(StringIO(rawfile),dialect='excel-tab')
+        csvfile = csv.reader(StringIO(rawfile),dialect='excel')
+
         for row in csvfile:
-            chiku = db.Query(Smgomi).filter('chomei =', unicode(row[0],'utf-8')).get()
-            Smbinkan(chomei = unicode(row[0],'utf-8'),
-            smgomi = chiku,
-            binkan=unicode(row[1],'utf-8')
-            ).put()
-        self.redirect(self.request.uri)
+            cho = unicode(row[5], 'UTF-8')
+            data_kanen = Smgomi(key_name = str(row[1]),
+            initial=unicode(row[0],'UTF-8'),
+            jichitai=unicode(row[2],'UTF-8'),
+            kanen = unicode(row[3],'UTF-8'),
+            funen = unicode(row[4],'UTF-8'),
+            chomei = cho,
+            kstart = unicode(row[6],'UTF-8'),
+            fstart = unicode(row[7],'UTF-8')
+            )
+            data_kanen.put()
+            #data_binkan = db.Query(Smbinkan).filter('chomei =', cho).get() #一件だけ取得
+            data_binkans = db.Query(Smbinkan).filter('chomei =', cho).fetch(limit=12)
+            for data_binkan in data_binkans:
+                data_kanenbinkan = Smgomibinkan(smgomi=data_kanen, smbinkan=data_binkan)
+                data_kanenbinkan.put()
 
 class SzHandler(webapp2.RequestHandler):
     def get(self):
@@ -163,12 +170,13 @@ class SzHandler(webapp2.RequestHandler):
                 template = JINJA_ENVIROMENT.get_template('gomi_aoiku_surugaku_a.ics')
                 self.response.headers['Content-Type'] = 'text/calendar'
                 self.response.write(template.render(tmp_value))
-            elif int(chiku_key) >= 15000:
+            elif int(chiku_key) > 15000:
                 items = Smgomi.get_by_key_name(chiku_key)
+                sbinkan =Smgomibinkan.all().filter('smgomi =', items).fetch(limit=12)
                 dt = datetime.datetime.today()
                 d = dt.strftime("%Y-%m-%d")
                 params = {'today': d}
-                tmp_value = {'items':items,'params':params}
+                tmp_value = {'items': items, 'sbinkan':sbinkan, 'params':params}
                 template = JINJA_ENVIROMENT.get_template('gomi_shimizuku_a.ics')
                 self.response.headers['Content-Type'] = 'text/calendar'
                 self.response.write(template.render(tmp_value))
@@ -184,37 +192,35 @@ class SzHandler(webapp2.RequestHandler):
                 self.response.write(template.render(tmp_value))
             else:
                 items = Smgomi.get_by_key_name(chiku_key)
+                sbinkan =Smgomibinkan.all().filter('smgomi =', items).fetch(limit=12)
                 dt = datetime.datetime.today()
                 d = dt.strftime("%Y-%m-%d")
                 params = {'today': d}
-                tmp_value = {'items':items,'params':params}
+                tmp_value = {'items': items, 'sbinkan':sbinkan, 'params':params}
                 template = JINJA_ENVIROMENT.get_template('gomi_shimizuku.ics')
                 self.response.headers['Content-Type'] = 'text/calendar'
                 self.response.write(template.render(tmp_value))
-
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIROMENT.get_template('index.html')
         self.response.write(template.render())
 
+#Sm_entyのテスト
 class test(webapp2.RequestHandler):
     def get(self):
         chiku_key = self.request.get('chiku')
-        items = Szgomi.get_by_key_name(chiku_key)
-        dt = datetime.datetime.today()
-        d = dt.strftime("%Y-%m-%d")
-        params = {'today': d}
-        tmp_value = {'items':items,'params':params}
-        template = JINJA_ENVIROMENT.get_or_select_template('cal.html')
-        self.response.write(template.render(tmp_value))
+        items = Smgomi.get_by_key_name(chiku_key)
+        c =Smgomibinkan.all().filter('smgomi =', items).fetch(limit=12)
+        for item in c:
+            b2 = item.smbinkan.binkan
+            print(b2.encode('utf-8'))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/Sz_entry',SzEntry),
     ('/Szf_entry',SzFunenEntry),
-    ('/Sm_entry',SmEntry),
     ('/Smb_entry',SmBinkanEntry),
-    ('/calendar',SzHandler),
-    ('/test', test)
+    ('/Sm_entry',SmKFBEntry),
+    ('/calendar',SzHandler)
 ], debug=True)
