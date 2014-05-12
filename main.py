@@ -160,46 +160,54 @@ class SzHandler(webapp2.RequestHandler):
     def get(self):
         chiku_key = self.request.get('chiku')
         alarm = self.request.get('alarm')
-        if alarm:
-            if int(chiku_key) < 15000:
-                items = Szgomi.get_by_key_name(chiku_key)
-                dt = datetime.datetime.today()
-                d = dt.strftime("%Y-%m-%d")
-                params = {'today': d}
-                tmp_value = {'items':items,'params':params}
-                template = JINJA_ENVIROMENT.get_template('gomi_aoiku_surugaku_a.ics')
-                self.response.headers['Content-Type'] = 'text/calendar'
-                self.response.write(template.render(tmp_value))
-            elif int(chiku_key) > 15000:
-                items = Smgomi.get_by_key_name(chiku_key)
-                sbinkan =Smgomibinkan.all().filter('smgomi =', items).fetch(limit=12)
-                dt = datetime.datetime.today()
-                d = dt.strftime("%Y-%m-%d")
-                params = {'today': d}
-                tmp_value = {'items': items, 'sbinkan':sbinkan, 'params':params}
-                template = JINJA_ENVIROMENT.get_template('gomi_shimizuku_a.ics')
-                self.response.headers['Content-Type'] = 'text/calendar'
-                self.response.write(template.render(tmp_value))
-        else:
-            if int(chiku_key) < 15000:
-                items = Szgomi.get_by_key_name(chiku_key)
-                dt = datetime.datetime.today()
-                d = dt.strftime("%Y-%m-%d")
-                params = {'today': d}
-                tmp_value = {'items':items,'params':params}
-                template = JINJA_ENVIROMENT.get_template('gomi_aoiku_surugaku.ics')
-                self.response.headers['Content-Type'] = 'text/calendar'
-                self.response.write(template.render(tmp_value))
+        try:
+            if alarm:
+                if int(chiku_key) < 1417 and int(chiku_key) > 1000:
+                    items = Szgomi.get_by_key_name(chiku_key)
+                    dt = datetime.datetime.today()
+                    d = dt.strftime("%Y-%m-%d")
+                    params = {'today': d}
+                    tmp_value = {'items':items,'params':params}
+                    template = JINJA_ENVIROMENT.get_template('gomi_aoiku_surugaku_a.ics')
+                    self.response.headers['Content-Type'] = 'text/calendar'
+                    self.response.write(template.render(tmp_value))
+                elif int(chiku_key) > 15000 and int(chiku_key) < 17012:
+                    items = Smgomi.get_by_key_name(chiku_key)
+                    sbinkan =Smgomibinkan.all().filter('smgomi =', items).fetch(limit=12)
+                    dt = datetime.datetime.today()
+                    d = dt.strftime("%Y-%m-%d")
+                    params = {'today': d}
+                    tmp_value = {'items': items, 'sbinkan':sbinkan, 'params':params}
+                    template = JINJA_ENVIROMENT.get_template('gomi_shimizuku_a.ics')
+                    self.response.headers['Content-Type'] = 'text/calendar'
+                    self.response.write(template.render(tmp_value))
+                else:
+                    self.response.write("<p>登録されていない地区コードが送信されました。</p>")
             else:
-                items = Smgomi.get_by_key_name(chiku_key)
-                sbinkan =Smgomibinkan.all().filter('smgomi =', items).fetch(limit=12)
-                dt = datetime.datetime.today()
-                d = dt.strftime("%Y-%m-%d")
-                params = {'today': d}
-                tmp_value = {'items': items, 'sbinkan':sbinkan, 'params':params}
-                template = JINJA_ENVIROMENT.get_template('gomi_shimizuku.ics')
-                self.response.headers['Content-Type'] = 'text/calendar'
-                self.response.write(template.render(tmp_value))
+                if int(chiku_key) < 1417 and int(chiku_key) > 1000:
+                    items = Szgomi.get_by_key_name(chiku_key)
+                    dt = datetime.datetime.today()
+                    d = dt.strftime("%Y-%m-%d")
+                    params = {'today': d}
+                    tmp_value = {'items':items,'params':params}
+                    template = JINJA_ENVIROMENT.get_template('gomi_aoiku_surugaku.ics')
+                    self.response.headers['Content-Type'] = 'text/calendar'
+                    self.response.write(template.render(tmp_value))
+                elif int(chiku_key) > 15000 and int(chiku_key) < 17012:
+                    items = Smgomi.get_by_key_name(chiku_key)
+                    sbinkan =Smgomibinkan.all().filter('smgomi =', items).fetch(limit=12)
+                    dt = datetime.datetime.today()
+                    d = dt.strftime("%Y-%m-%d")
+                    params = {'today': d}
+                    tmp_value = {'items': items, 'sbinkan':sbinkan, 'params':params}
+                    template = JINJA_ENVIROMENT.get_template('gomi_shimizuku.ics')
+                    self.response.headers['Content-Type'] = 'text/calendar'
+                    self.response.write(template.render(tmp_value))
+                else:
+                    self.response.write("<p>登録されていない地区コードが送信されました。</p>")
+
+        except:
+            self.response.write("<p>登録されていない地区コードが送信されました。繰り返しエラーが発生するようでしたら、管理者までご連絡をお願いします。</p>")
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -223,4 +231,4 @@ app = webapp2.WSGIApplication([
     ('/Smb_entry',SmBinkanEntry),
     ('/Sm_entry',SmKFBEntry),
     ('/calendar',SzHandler)
-], debug=True)
+], debug=False)

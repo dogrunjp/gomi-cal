@@ -6,6 +6,9 @@ body{
 p{
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino kaku Gothic Pro","メイリオ",Meiryo, Osaka,sans-serif;
 }
+span.em{
+    font-weight: bold;
+}
 #content input{
     font-size: 1.6rem;
 }
@@ -15,6 +18,10 @@ p{
 #content form button{
     width: 100%;
 }
+#content form input[type="text"]{
+    font-size: 14px;
+}
+
 #footer img, #content img{
     vertical-align: baseline;
 }
@@ -24,17 +31,31 @@ p{
     margin: 0 0 15px;
 }
 #footer-bar{
-    height: 35px;
-    position: fixed;
+    height: 50px;
     bottom: 0;
-    background-color: #0f92ba;
-    text-align: center;
-    color: #ffffff;
     width: 100%;
 }
-#footer-bar .name{
-    margin-top: 10px;
+
+#footer .sns{
+    margin-top: 50px;
+    width: 250px;
+    height: 30px;
+    clear: both;
 }
+#footer .sns .btn{
+    margin-right: 20px;
+    height: 30px;
+    float: left;
+}
+#footer-bar{
+    text-align: center;
+}
+#footer-bar .name{
+    height: 40px;
+    font-size: 14px;
+    padding-top: 8px;
+}
+
 @media screen and (min-width: 800px ) {
    nav.top-bar{
     margin: 0;
@@ -77,8 +98,7 @@ p{
     }
     #footer {
         width: 780px;
-        margin: 30px auto 60px;
-        min-height: 100px;
+        margin: 30px auto 50px;
     }
 
 
@@ -119,17 +139,21 @@ p{
         width: 80%;
         margin: 30px auto;
     }
+    #footer .sns{
+    margin-top: 50px;
+    margin-bottom: 40px;
+    width: 250px;
+    height: 30px;
+    clear: both;
+    }
     #footer-bar{
     position: relative;
     height: 40px;
-    background-color: #0f92ba;
-    text-align: center;
-    color: #ffffff;
     width: 100%;
     padding-top: 5px;
     }
     #footer-bar .name{
-        font-size: 1.6rem;
+        font-size: 1rem;
     }
 }
 @media only screen
@@ -139,14 +163,14 @@ p{
     margin: 0;
     padding: 0;
     background-color: #0f92ba;
-    height:80px;
+    height:36px;
     }
     nav.top-bar h1{
         line-height: 2;
         color: #ffffff;
         margin-top: 0px;
-        margin-left: 12px;
-        font-size: 2.45rem;
+        margin-left: 5px;
+        font-size: 1rem;
         font-weight: bold;
     }
     #header{
@@ -154,57 +178,58 @@ p{
         margin: 0 auto;
     }
     #header p{
-        margin-top: 15px;
-        font-size: 2rem;
-        line-height: 1.8;
+        margin-top: 10px;
+        font-size: 1rem;
+        line-height: 1.6;
     }
     #content{
         width: 90%;
         margin: 0 auto;
     }
     #content h3{
-        margin: 20px 0 10px;
+        margin: 15px 0 15px;
         line-height: 1.6;
         font-weight: normal;
-        font-size: 2rem;
+        font-size: 1rem;
     }
     #content form select{
-        font-size: 30px;
-        height: 60px;
+        font-size: 14px;
+        height: 38px;
     }
     #content form label{
-        font-size: 36px;
-        margin-bottom: 22px;
+        font-size: 14px;
+        margin-bottom: 10px;
     }
-    #content form input{
-        height: 56px;
+    #content form input[type="text"]{
+        font-size: 14px;
+        height: 38px;
     }
     #content form input[type="checkbox"]{
-        font-size: 36px;
+        font-size: 14px;
     }
     #content button{
         font-weight: bold;
-        font-size: 1.8rem;
+        font-size: 1rem;
     }
     #footer.row{
         width: 90%;
-        padding-bottom: 60px;
-        margin: 30px auto 60px;
-        min-height: 250px;
+        padding-bottom: 10px;
+        margin: 20px auto 10px;
+        min-height: 100px;
     }
     #footer p{
-        font-size: 1.6rem;
+        font-size: 1rem;
     }
+    #footer .sns .btn{
+    margin-right: 10px;
+}
     #footer-bar{
         position: relative;
-        height: 60px;
-        background-color: #0f92ba;
-        text-align: center;
-        color: #ffffff;
+        height: 50px;
         width: 100%;
         padding-top: 5px;
     }
     #footer-bar .name{
-        font-size: 1.8rem;
+        font-size: 1rem;
     }
 }

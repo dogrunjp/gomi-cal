@@ -2,6 +2,11 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<meta property="og:title" content="私のゴミカレンダー　平成26年度静岡市版" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://shizu-gomi.appspot.com" />
+<meta property="og:description" content="「私のゴミカレンダー」は静岡市のお住まいの地区のごみ収集日データをカレンダー形式でダウンロードできるサービスです" />
 <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="/js/jquery.optionTree.js"></script>
 <script src="js/2014-gomi-option.json" charset="utf-8"></script>
@@ -20,10 +25,10 @@
 <h1>私のゴミカレンダー　平成26年度静岡市版</h1>
 </nav>
 <div id="header">
-    <p>「私のゴミカレンダー」は静岡市（一部地域除く）のお住まいの地区のごみ収集日
+    <p><span class="em">私のゴミカレンダー </span>は静岡市（一部地域除く）のお住まいの地区のごみ収集日
     カレンダー形式でダウンロードできるサービスです。
     ダウンロードしたファイル（icsファイル）はMacやiPhoneのカレンダーにインポートできます。
-    ゴミ回収日のリマインダーとして、普段使うスマホやPCのカレンダーに表示してご利用ください。
+    ゴミ回収日のリマインダーとして、スマホやPCのカレンダーに表示してご利用ください。
     </p>
 </div>
 
@@ -40,14 +45,35 @@
 </div>
 <div id="footer" class="row">
     <p><span class="fa fa-info-circle"></span> このサービスは静岡市の「<a href="http://www.city.shizuoka.jp/deps/shushu/bunbetsu-guidebook.html">平成26年度 葵区・駿河区のごみの出し方・分別ガイドブック</a>」
-    を基に、 <a href="https://twitter.com/kudarisenmon" target="_blank">@kudarisenmon</a>さんに作成していいただいたデータを利用して運営しています。</p>
+    を基に、 <a href="https://twitter.com/kudarisenmon" target="_blank">@kudarisenmon</a>さんに作成していいただいたデータを利用しています。</p>
     <p><span class="fa fa-info-circle"></span> このサービスは、サービス制作者が個人的に運営するもので、不完全なデータを含んでいる場合があります。
         正確なデータを知りたい方は静岡市のガイドブックをご利用ください。
         またデータの不具合などお気づきのことがあれば、<a href="https://twitter.com/oec014">サービス制作者</a>のTwitterアカウントにぜひご連絡ください。
     </p>
+    <div class="sns">
+        <!-- SNS　LINE -->
+            <span>
+            <script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+            <script type="text/javascript">
+            new media_line_me.LineButton({"pc":false,"lang":"ja","type":"a"});
+            </script>
+            </span>
+
+        <!-- SNS  twitter-->
+            <div class="btn">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none">ツイート</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+        <!-- SNS FB -->
+            <div class="btn">
+            <div class="fb-like" data-href="http://shizu-gomi.appspot.com" data-width="80px" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
+            </div>
+    </div>
 </div>
 <div id="footer-bar">
-    <div class="name">Crafted by @oec014</div>
+    <div class="box">
+        <div class="name">Crafted by <a href="https://twitter.com/oec014">オーイシ</a></div>
+    </div>
 </div>
 <script type="text/javascript">
 $(function() {
@@ -71,6 +97,13 @@ $(function() {
 
 });
 </script>
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=398395553627561&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>
